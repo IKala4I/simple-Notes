@@ -1,0 +1,17 @@
+.field {
+    width: 13em;
+}
+
+.textarea {
+    height: 4em;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2em;
+}
+
+.errorSpan {
+    color: red;
+}

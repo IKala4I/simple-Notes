@@ -1,0 +1,32 @@
+.headerContainer{
+    background-color: azure;
+}
+
+.firstRow {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    font-size: 1.5rem;
+    align-items: center;
+}
+
+.notifications{
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.notificationsBell{
+    padding-right: 0.5em;
+}
+
+.logoBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    width: 2em;
+    height: 2em;
+}
