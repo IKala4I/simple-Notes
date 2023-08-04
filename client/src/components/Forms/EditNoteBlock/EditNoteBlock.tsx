@@ -9,7 +9,7 @@ import {noteCategories} from '../../../enums/noteCategories'
 import {getDatesFromContent} from '../../../utils/getDatesFromContent'
 
 type EditNoteBlockProps = {
-    noteIdForUpdate: number
+    noteIdForUpdate: string
 }
 
 const EditNoteBlock: FC<EditNoteBlockProps> = ({noteIdForUpdate}) => {

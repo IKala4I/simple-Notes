@@ -14,7 +14,7 @@ type TableProps = {
     tableType: tableTypes
     isCreateMode: boolean
     isEditMode: boolean
-    noteIdForUpdate: number
+    noteIdForUpdate: string
 }
 
 const Table: FC<TableProps> = ({tableType, ...restProps}) => {

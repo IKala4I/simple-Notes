@@ -1,7 +1,7 @@
 import {noteCategories} from '../enums/noteCategories'
 
 export type NoteType = {
-    id: number,
+    _id: string,
     name: string,
     created: string,
     category: noteCategories,

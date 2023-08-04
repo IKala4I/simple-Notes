@@ -5,9 +5,9 @@ import {NoteType} from '../../../../../Types/types'
 
 type TableNoteRowProps = {
     note: NoteType
-    archiveUnarchiveCB: (noteId: number) => void
-    removeNoteCB: (noteId: number) => void
-    showEditFormCB: (noteId: number) => void
+    archiveUnarchiveCB: (noteId: string) => void
+    removeNoteCB: (noteId: string) => void
+    showEditFormCB: (noteId: string) => void
 }
 const TableNoteRow: FC<TableNoteRowProps> = ({note, archiveUnarchiveCB, removeNoteCB, showEditFormCB}) => {
     return (
@@ -23,7 +23,7 @@ const TableNoteRow: FC<TableNoteRowProps> = ({note, archiveUnarchiveCB, removeNo
             <div className={styles.tools}>
                 {!note.archived ?
                     <span>
-            <button className={styles.toolButton} onClick={() => showEditFormCB(note.id)}>
+            <button className={styles.toolButton} onClick={() => showEditFormCB(note._id)}>
     <img className={styles.toolImg} src={tools.pencilTool} alt="edit"/>
         </button>
         </span>
@@ -32,14 +32,14 @@ const TableNoteRow: FC<TableNoteRowProps> = ({note, archiveUnarchiveCB, removeNo
                     </div>
                 }
                 <span>
-        <button className={styles.toolButton} onClick={() => archiveUnarchiveCB(note.id)}>
+        <button className={styles.toolButton} onClick={() => archiveUnarchiveCB(note._id)}>
     <img className={styles.toolImg}
          src={note.archived ? tools.unarchiveToolGrey : tools.archiveToolGrey}
          alt={note.archived ? 'unarchive' : 'archive'}/>
     </button>
     </span>
                 <span>
-    <button className={styles.toolButton} onClick={() => removeNoteCB(note.id)}>
+    <button className={styles.toolButton} onClick={() => removeNoteCB(note._id)}>
     <img className={styles.toolImg} src={tools.trashToolGrey} alt="trash"/>
         </button>
         </span>

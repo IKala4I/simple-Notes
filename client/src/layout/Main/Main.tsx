@@ -41,20 +41,20 @@ const Main: FC = () => {
                               onClickCB={showArchivedNotes}/>
                 <section>
                     <Table tableType={tableTypes.ActiveNotes} isCreateMode={isCreateMode} isEditMode={isEditMode}
-                           noteIdForUpdate={noteIdForUpdate as number}/>
+                           noteIdForUpdate={noteIdForUpdate as string}/>
                     {isCreateMode ? <CreateNoteBlock onCloseForm={toggleCreateMode}/> :
                         <ActionButton imgSrc={logos.plusLogo} buttonText='Create note'
                                       onClickCB={toggleCreateMode}/>}
-                    {isEditMode ? <EditNoteBlock noteIdForUpdate={noteIdForUpdate as number}/> : ''}
+                    {isEditMode ? <EditNoteBlock noteIdForUpdate={noteIdForUpdate as string}/> : ''}
                 </section>
                 <section>
                     {isShowedArchivedNotes ?
                         <Table tableType={tableTypes.ArchivedNotes} isCreateMode={isCreateMode} isEditMode={isEditMode}
-                               noteIdForUpdate={noteIdForUpdate as number}/> : ''}
+                               noteIdForUpdate={noteIdForUpdate as string}/> : ''}
                 </section>
                 <section>
                     <Table tableType={tableTypes.Summary} isCreateMode={isCreateMode} isEditMode={isEditMode}
-                           noteIdForUpdate={noteIdForUpdate as number}/>
+                           noteIdForUpdate={noteIdForUpdate as string}/>
                 </section>
             </div>
         </main>

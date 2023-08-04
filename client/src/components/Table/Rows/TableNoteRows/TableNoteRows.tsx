@@ -5,19 +5,27 @@ import {noteActions} from '../../../../redux/notesReducer'
 import {formModesActions} from '../../../../redux/formModesReducer'
 import {FC} from 'react'
 import {NoteType} from '../../../../Types/types'
+import {ThunkDispatch} from 'redux-thunk'
+import {AppStateType} from '../../../../redux/store'
+import {
+    removeNote as removeNoteById,
+    archiveNote as archiveNoteById,
+    unarchiveNote as unarchiveNoteById
+} from '../../../../redux/notesReducer'
 
 type TableNoteRowsProps = {
     notes: NoteType[]
-    noteIdForUpdate: number
+    noteIdForUpdate: string
     isEditMode: boolean
     isCreateMode: boolean
 }
 const TableNoteRows: FC<TableNoteRowsProps> = ({notes, noteIdForUpdate, isEditMode, isCreateMode}) => {
     const dispatch: Dispatch = useDispatch()
+    const thunkDispatch: ThunkDispatch<AppStateType, any, any> = useDispatch()
 
-    const showEditForm = (noteId: number | null = null): void => {
-        if (noteId !== noteIdForUpdate && Number.isFinite(noteId)) {
-            dispatch(noteActions.changeNoteIdForUpdate(noteId as number))
+    const showEditForm = (noteId: string | null = null): void => {
+        if (noteId !== noteIdForUpdate && (typeof noteId === "string" && noteId.length > 0)) {
+            dispatch(noteActions.changeNoteIdForUpdate(noteId as string))
         }
         if (!isEditMode) {
             if (isCreateMode)
@@ -26,23 +34,23 @@ const TableNoteRows: FC<TableNoteRowsProps> = ({notes, noteIdForUpdate, isEditMo
         }
     }
 
-    const archiveNote = (noteId: number): void => {
+    const archiveNote = (noteId: string): void => {
         if (noteId === noteIdForUpdate && isEditMode)
             dispatch(formModesActions.toggleEditMode())
-        dispatch(noteActions.archiveNote(noteId))
+        thunkDispatch(archiveNoteById(noteId))
     }
-    const unarchiveNote = (noteId: number): void => {
-        dispatch(noteActions.unarchiveNote(noteId))
+    const unarchiveNote = (noteId: string): void => {
+        thunkDispatch(unarchiveNoteById(noteId))
     }
-    const removeNote = (noteId: number): void => {
+    const removeNote = (noteId: string): void => {
         if (noteId === noteIdForUpdate && isEditMode)
             dispatch(formModesActions.toggleEditMode())
-        dispatch(noteActions.removeNote(noteId))
+        thunkDispatch(removeNoteById(noteId))
     }
 
     const tableRows = notes.map((note: NoteType) =>
         <TableNoteRow
-            key={note.id}
+            key={note._id}
             note={note}
             archiveUnarchiveCB={note.archived ? unarchiveNote : archiveNote}
             removeNoteCB={removeNote}
