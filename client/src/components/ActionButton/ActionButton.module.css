@@ -1,0 +1,19 @@
+.action {
+    display: flex;
+    padding: 10px 0;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.actionImg {
+    width: 1.7em;
+    margin-right: 5px;
+}
+
+.actionButton {
+    padding: 5px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}

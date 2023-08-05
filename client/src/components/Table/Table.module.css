@@ -1,0 +1,6 @@
+.table {
+    display: grid;
+    row-gap: 0.7em;
+    font-family: sans-serif;
+    margin: 1em 0;
+}

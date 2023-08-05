@@ -1,0 +1,27 @@
+.tableHeader {
+    background-color: #646464;
+    border-radius: 5px;
+    color: white;
+    display: grid;
+    align-items: center;
+    padding: 7px;
+    font-size: 1.2em;
+}
+
+.tableNoteHeader{
+    grid-template-columns: 5% 15% 15% 10% 30% 15% 10%;
+}
+
+.summaryTableHeader{
+    grid-template-columns: 5% 40% 20% 30%;
+    margin-top: 3em;
+}
+
+.toolImg {
+    width: 1.5em;
+}
+
+.tools {
+    display: flex;
+    justify-content: space-between;
+}

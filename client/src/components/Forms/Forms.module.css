@@ -1,0 +1,25 @@
+.form {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    font-size: 1.2em;
+}
+
+.fieldBlock {
+    margin-bottom: 0.5em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.actionButton {
+    padding: 5px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    width: 5em;
+}
