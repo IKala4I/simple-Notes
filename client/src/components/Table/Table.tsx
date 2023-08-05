@@ -5,9 +5,9 @@ import {tableTypes} from '../../enums/tableTypes'
 import SummaryTableHeader from './Headers/SummaryTableHeader/SummaryTableHeader'
 import SummaryTableRows from './Rows/SummaryTableRows/SummaryTableRows'
 import {useSelector} from 'react-redux'
-import {getNotes} from '../../redux/selectors'
+import {getNotes, getStats} from '../../redux/selectors'
 import {FC} from 'react'
-import {NoteType} from '../../Types/types'
+import {NotesArray, Stats} from '../../Types/types'
 
 
 type TableProps = {
@@ -18,7 +18,8 @@ type TableProps = {
 }
 
 const Table: FC<TableProps> = ({tableType, ...restProps}) => {
-    const notes: NoteType[] = useSelector(getNotes)
+    const notes: NotesArray = useSelector(getNotes)
+    const stats: Stats = useSelector(getStats)
 
     const archivedNotes = notes.filter(note => note.archived)
     const activeNotes = notes.filter(note => !note.archived)
@@ -42,7 +43,7 @@ const Table: FC<TableProps> = ({tableType, ...restProps}) => {
             return (
                 <div className={styles.table}>
                     <SummaryTableHeader/>
-                    <SummaryTableRows notes={notes}/>
+                    <SummaryTableRows stats={stats} notes={notes}/>
                 </div>
             )
         default:

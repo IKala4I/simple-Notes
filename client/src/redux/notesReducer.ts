@@ -1,6 +1,6 @@
 import {noteCategories} from '../enums/noteCategories'
 import {InferActionsTypes} from './store'
-import {NotesArray, NoteType} from '../Types/types'
+import {NotesArray, NoteType, Stats} from '../Types/types'
 import notesAPI from '../api/notesAPI'
 
 const CREATE_NOTE = 'notes/CREATE_NOTE'
@@ -10,10 +10,12 @@ const REMOVE_NOTE = 'notes/REMOVE_NOTE'
 const UPDATE_NOTE = 'notes/UPDATE_NOTE'
 const CHANGE_NOTE_ID_FOR_UPDATE = 'notes/CHANGE_NOTE_ID_FOR_UPDATE'
 const SET_NOTES = 'notes/SET_NOTES'
+const SET_STATS = 'notes/SET_STATS'
 
 
 const initialState = {
     notes: [] as NotesArray,
+    notesStats: [] as Stats,
     noteIdForUpdate: null as (string | null)
 }
 
@@ -70,6 +72,11 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
                 ...state,
                 notes: [...action.notes]
             }
+        case SET_STATS:
+            return {
+                ...state,
+                notesStats: [...action.stats]
+            }
         default:
             return state
     }
@@ -84,7 +91,8 @@ export const noteActions = {
         payload: {noteId, data}
     } as const),
     changeNoteIdForUpdate: (noteId: string) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const),
-    setNotes: (notes: NotesArray) => ({type: SET_NOTES, notes} as const)
+    setNotes: (notes: NotesArray) => ({type: SET_NOTES, notes} as const),
+    setStats: (stats: Stats) => ({type: SET_STATS, stats} as const)
 }
 
 //thunks
@@ -92,6 +100,10 @@ export const noteActions = {
 export const getAllNotes = () => async (dispatch: any) => {
     const notes = await notesAPI.getNotes()
     dispatch(noteActions.setNotes(notes))
+}
+export const getStats = () => async (dispatch: any) => {
+    const stats = await notesAPI.getStats()
+    dispatch(noteActions.setStats(stats))
 }
 export const removeNote = (noteId: string) => async (dispatch: any) => {
     const status = await notesAPI.removeNote(noteId)

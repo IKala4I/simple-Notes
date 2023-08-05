@@ -1,7 +1,7 @@
 import TableNoteRow from './TableNoteRow/TableNoteRow'
 import {Dispatch} from 'redux'
 import {useDispatch} from 'react-redux'
-import {noteActions} from '../../../../redux/notesReducer'
+import {getStats, noteActions} from '../../../../redux/notesReducer'
 import {formModesActions} from '../../../../redux/formModesReducer'
 import {FC} from 'react'
 import {NoteType} from '../../../../Types/types'

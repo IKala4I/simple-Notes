@@ -1,6 +1,6 @@
 import {AppStateType} from './store'
 import {noteCategories} from '../enums/noteCategories'
-import {NoteType} from '../Types/types'
+import {NoteType, Stats} from '../Types/types'
 
 export const getNotes = (state: AppStateType): NoteType[] => {
     return state.notes.notes
@@ -25,4 +25,7 @@ export const getContentNoteForUpdate = (noteId: string) => (state: AppStateType)
 export const getCategoryNoteForUpdate = (noteId: string) => (state: AppStateType): noteCategories => {
     const notes = getNotes(state)
     return notes.find(note => note._id === noteId)?.category || noteCategories.Task
+}
+export const getStats = (state: AppStateType): Stats => {
+    return state.notes.notesStats
 }

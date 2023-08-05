@@ -11,3 +11,11 @@ export type NoteType = {
 }
 
 export type NotesArray = Array<NoteType>
+
+export type StatType = {
+    category: noteCategories,
+    activeCount: number,
+    archivedCount: number
+}
+
+export type Stats = Array<StatType>

@@ -1,25 +1,31 @@
-import {noteCategories} from '../../../../enums/noteCategories'
 import SummaryTableRow from './SummaryTableRow/SummaryTableRow'
-import {NoteType} from '../../../../Types/types'
-import {FC, ReactNode} from 'react'
+import {NotesArray, Stats} from '../../../../Types/types'
+import {FC, ReactNode, useEffect} from 'react'
+import {ThunkDispatch} from 'redux-thunk'
+import {AppStateType} from '../../../../redux/store'
+import {useDispatch} from 'react-redux'
+import {getStats} from '../../../../redux/notesReducer'
 
 
 type SummaryTableRowsProps = {
-    notes: NoteType[]
+    stats: Stats,
+    notes: NotesArray
 }
-const SummaryTableRows: FC<SummaryTableRowsProps> = ({notes}) => {
+const SummaryTableRows: FC<SummaryTableRowsProps> = ({stats, notes}) => {
     const summaryTableRows: ReactNode[] = []
+    const thunkDispatch: ThunkDispatch<AppStateType, any, any> = useDispatch()
 
-    Object.values(noteCategories).forEach(category => {
-        const filteredNotes = notes.filter((note) => note.category === category)
-        const activeNotesCount = filteredNotes.filter((note) => !note.archived).length
-        const archivedNotesCount = filteredNotes.filter((note) => note.archived).length
+    useEffect(() => {
+        thunkDispatch(getStats())
+    }, [notes])
+
+    stats.forEach(categoryStats => {
         summaryTableRows.push(
             <SummaryTableRow
-                key={category}
-                category={category}
-                activeNotesCount={activeNotesCount}
-                archivedNotesCount={archivedNotesCount}
+                key={categoryStats.category}
+                category={categoryStats.category}
+                activeNotesCount={categoryStats.activeCount}
+                archivedNotesCount={categoryStats.archivedCount}
             />)
     })
 
