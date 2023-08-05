@@ -25,10 +25,10 @@ const server = http.createServer(app)
 server.listen(8080, () => {
 })
 
-const MONGO_URL = 'mongodb+srv://testUser:mypassword@cluster0.ytkbkgw.mongodb.net/?retryWrites=true&w=majority'
+// const MONGO_URL = 'mongodb+srv://<User>:<password>@cluster0.ytkbkgw.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.Promise = Promise
-mongoose.connect(MONGO_URL) //Provide const MONGO_URL
+mongoose.connect('MONGO_URL') //Provide const MONGO_URL
 mongoose.connection.on('error', (error: Error) => console.log(error))
 
 app.use('/', router())
