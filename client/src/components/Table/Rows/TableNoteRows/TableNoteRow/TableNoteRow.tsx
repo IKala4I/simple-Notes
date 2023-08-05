@@ -5,18 +5,19 @@ import {NoteType} from '../../../../../Types/types'
 
 type TableNoteRowProps = {
     note: NoteType
+    created: string
     archiveUnarchiveCB: (noteId: string) => void
     removeNoteCB: (noteId: string) => void
     showEditFormCB: (noteId: string) => void
 }
-const TableNoteRow: FC<TableNoteRowProps> = ({note, archiveUnarchiveCB, removeNoteCB, showEditFormCB}) => {
+const TableNoteRow: FC<TableNoteRowProps> = ({note, created, archiveUnarchiveCB, removeNoteCB, showEditFormCB}) => {
     return (
         <div className={`${styles.tableRow} ${styles.tableNoteRow}`}>
             <div className={styles.iconBlock}>
                 <img className={styles.iconImg} src={icons[note.category]} alt="cart"/>
             </div>
             <span className={styles.info}>{note.name}</span>
-            <span className={styles.info}>{note.created}</span>
+            <span className={styles.info}>{created}</span>
             <span className={styles.info}>{note.category}</span>
             <span className={`${styles.noteContent} ${styles.info}`}>{note.content}</span>
             <span className={styles.info}>{note.dates}</span>

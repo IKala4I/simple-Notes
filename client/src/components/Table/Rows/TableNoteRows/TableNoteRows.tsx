@@ -12,6 +12,7 @@ import {FC} from 'react'
 import {NoteType} from '../../../../Types/types'
 import {ThunkDispatch} from 'redux-thunk'
 import {AppStateType} from '../../../../redux/store'
+import {format} from 'date-fns';
 
 type TableNoteRowsProps = {
     notes: NoteType[]
@@ -52,6 +53,7 @@ const TableNoteRows: FC<TableNoteRowsProps> = ({notes, noteIdForUpdate, isEditMo
         <TableNoteRow
             key={note._id}
             note={note}
+            created={format(new Date(note.created), 'yyyy-MM-dd')}
             archiveUnarchiveCB={note.archived ? unarchiveNote : archiveNote}
             removeNoteCB={removeNote}
             showEditFormCB={showEditForm}
