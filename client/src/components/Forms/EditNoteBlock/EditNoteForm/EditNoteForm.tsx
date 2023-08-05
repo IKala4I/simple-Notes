@@ -3,7 +3,7 @@ import {FC} from 'react'
 import styles from '../../Forms.module.css'
 import {categoryOptions, createField, GetStringKeys, Input, Select, Textarea} from '../../../FormControls/FormControls'
 import {maxLengthCreator} from '../../../../utils/validators'
-import {EditFormDataType} from '../EditNoteBlock'
+import {NoteTypeForUpdateNote} from '../../../../api/notesAPI'
 
 const maxLength20 = maxLengthCreator(20)
 const maxLength100 = maxLengthCreator(100)
@@ -12,7 +12,7 @@ type EditNoteFormOwnProps = {
     onCloseForm: () => void,
     noteData: { noteName: string, noteContent: string }
 }
-const EditNoteForm: FC<InjectedFormProps<EditFormDataType, EditNoteFormOwnProps>
+const EditNoteForm: FC<InjectedFormProps<NoteTypeForUpdateNote, EditNoteFormOwnProps>
     & EditNoteFormOwnProps> = ({onCloseForm, handleSubmit, noteData}) => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -34,7 +34,7 @@ const EditNoteForm: FC<InjectedFormProps<EditFormDataType, EditNoteFormOwnProps>
     )
 }
 
-const EditNoteReduxForm = reduxForm<EditFormDataType, EditNoteFormOwnProps>({form: 'createNote'})(EditNoteForm)
+const EditNoteReduxForm = reduxForm<NoteTypeForUpdateNote, EditNoteFormOwnProps>({form: 'createNote'})(EditNoteForm)
 
-type EditNoteFormTypeKeys = GetStringKeys<EditFormDataType>
+type EditNoteFormTypeKeys = GetStringKeys<NoteTypeForUpdateNote>
 export default EditNoteReduxForm

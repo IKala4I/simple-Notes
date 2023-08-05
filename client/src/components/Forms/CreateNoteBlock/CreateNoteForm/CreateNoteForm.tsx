@@ -3,7 +3,7 @@ import {FC} from 'react'
 import styles from '../../Forms.module.css'
 import {categoryOptions, createField, GetStringKeys, Input, Select, Textarea} from '../../../FormControls/FormControls'
 import {maxLengthCreator, required} from '../../../../utils/validators'
-import {CreateFormDataType} from '../CreateNoteBlock'
+import {NoteTypeForCreateNote} from '../../../../api/notesAPI'
 
 const maxLength20 = maxLengthCreator(20)
 const maxLength100 = maxLengthCreator(100)
@@ -11,7 +11,7 @@ const maxLength100 = maxLengthCreator(100)
 type CreateNoteFormOwnProps = {
     onCloseForm: any
 }
-const CreateNoteForm: FC<InjectedFormProps<CreateFormDataType, CreateNoteFormOwnProps>
+const CreateNoteForm: FC<InjectedFormProps<NoteTypeForCreateNote, CreateNoteFormOwnProps>
     & CreateNoteFormOwnProps> = ({onCloseForm, handleSubmit}: any) => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -33,8 +33,8 @@ const CreateNoteForm: FC<InjectedFormProps<CreateFormDataType, CreateNoteFormOwn
     )
 }
 
-const CreateNoteReduxForm = reduxForm<CreateFormDataType, CreateNoteFormOwnProps>({form: 'createNote'})(CreateNoteForm)
+const CreateNoteReduxForm = reduxForm<NoteTypeForCreateNote, CreateNoteFormOwnProps>({form: 'createNote'})(CreateNoteForm)
 
-type CreateNoteFormTypeKeys = GetStringKeys<CreateFormDataType>
+type CreateNoteFormTypeKeys = GetStringKeys<NoteTypeForCreateNote>
 
 export default CreateNoteReduxForm

@@ -1,17 +1,17 @@
 import TableNoteRow from './TableNoteRow/TableNoteRow'
 import {Dispatch} from 'redux'
 import {useDispatch} from 'react-redux'
-import {getStats, noteActions} from '../../../../redux/notesReducer'
+import {
+    archiveNote as archiveNoteById,
+    noteActions,
+    removeNote as removeNoteById,
+    unarchiveNote as unarchiveNoteById
+} from '../../../../redux/notesReducer'
 import {formModesActions} from '../../../../redux/formModesReducer'
 import {FC} from 'react'
 import {NoteType} from '../../../../Types/types'
 import {ThunkDispatch} from 'redux-thunk'
 import {AppStateType} from '../../../../redux/store'
-import {
-    removeNote as removeNoteById,
-    archiveNote as archiveNoteById,
-    unarchiveNote as unarchiveNoteById
-} from '../../../../redux/notesReducer'
 
 type TableNoteRowsProps = {
     notes: NoteType[]

@@ -1,7 +1,6 @@
-import {noteCategories} from '../enums/noteCategories'
 import {InferActionsTypes} from './store'
 import {NotesArray, NoteType, Stats} from '../Types/types'
-import notesAPI from '../api/notesAPI'
+import notesAPI, {NoteTypeForCreateNote, NoteTypeForUpdateNote} from '../api/notesAPI'
 
 const CREATE_NOTE = 'notes/CREATE_NOTE'
 const ARCHIVE_NOTE = 'notes/ARCHIVE_NOTE'
@@ -24,17 +23,13 @@ type ActionsType = InferActionsTypes<typeof noteActions>
 
 const notesReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        // case CREATE_NOTE:
-        //     return {
-        //         ...state,
-        //         notes: [
-        //             ...state.notes,
-        //             {
-        //                 ...action.note,
-        //                 id: state.notes.length,
-        //                 archived: false
-        //             }]
-        //     }
+        case CREATE_NOTE:
+            return {
+                ...state,
+                notes: [
+                    ...state.notes,
+                    {...action.note}]
+            }
         case ARCHIVE_NOTE:
             return {
                 ...state,
@@ -50,18 +45,17 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
                 ...state,
                 notes: state.notes.filter(note => note._id !== action.noteId)
             }
-        // case UPDATE_NOTE:
-        //     return {
-        //         ...state,
-        //         notes: state.notes.map(note => {
-        //             if (note.id === action.payload.noteId)
-        //                 return {
-        //                     ...note,
-        //                     ...action.payload.data
-        //                 }
-        //             return note
-        //         })
-        //     }
+        case UPDATE_NOTE:
+            return {
+                ...state,
+                notes: state.notes.map(note => {
+                    if (note._id === action.payload.noteId)
+                        return {
+                            ...action.payload.note
+                        }
+                    return note
+                })
+            }
         case CHANGE_NOTE_ID_FOR_UPDATE:
             return {
                 ...state,
@@ -82,13 +76,13 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 }
 export const noteActions = {
-    createNote: (note: NoteTypeForCreateNote) => ({type: CREATE_NOTE, note} as const),
+    createNoteSuccess: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
     archiveNoteSuccess: (noteId: string) => ({type: ARCHIVE_NOTE, noteId} as const),
     unarchiveNoteSuccess: (noteId: string) => ({type: UNARCHIVE_NOTE, noteId} as const),
     removeNoteById: (noteId: string) => ({type: REMOVE_NOTE, noteId} as const),
-    updateNote: (noteId: string, data: DataForUpdateNoteType) => ({
+    updateNoteSuccess: (noteId: string, note: NoteType) => ({
         type: UPDATE_NOTE,
-        payload: {noteId, data}
+        payload: {noteId, note}
     } as const),
     changeNoteIdForUpdate: (noteId: string) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const),
     setNotes: (notes: NotesArray) => ({type: SET_NOTES, notes} as const),
@@ -120,21 +114,18 @@ export const unarchiveNote = (noteId: string) => async (dispatch: any) => {
     if (status === 200)
         dispatch(noteActions.unarchiveNoteSuccess(noteId))
 }
-
-
-type NoteTypeForCreateNote = {
-    name: string,
-    created: string,
-    category: noteCategories,
-    content: string,
-    dates: string
+export const createNote = (noteData: NoteTypeForCreateNote) => async (dispatch: any) => {
+    const response = await notesAPI.createNote(noteData)
+    if (response.status === 201)
+        dispatch(noteActions.createNoteSuccess(response.data))
 }
-
-type DataForUpdateNoteType = {
-    name: string,
-    content: string,
-    category: noteCategories,
-    dates: string
+export const updateNote = (noteId: string, noteData: NoteTypeForUpdateNote) => async (dispatch: any) => {
+    const response = await notesAPI.updateNote(noteId, noteData)
+    if (response.status === 200) {
+        const response = await notesAPI.getNoteById(noteId)
+        if (response.status === 200)
+            dispatch(noteActions.updateNoteSuccess(noteId, response.data))
+    }
 }
 const updateObjectInArray = (
     items: NoteType[],

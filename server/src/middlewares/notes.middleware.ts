@@ -50,7 +50,7 @@ export const updateNoteValid = async (req: express.Request, res: CustomResponse,
 
         res.data = {
             ...req.body,
-            ...(typeof content === 'string' ? { dates } : {}),
+            ...(typeof content === 'string' ? {dates} : {}),
         }
         next()
     } catch (error) {

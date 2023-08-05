@@ -1,12 +1,12 @@
 import {Dispatch} from 'redux'
 import {useDispatch} from 'react-redux'
-import {noteActions} from '../../../redux/notesReducer'
+import {createNote} from '../../../redux/notesReducer'
 import {formModesActions} from '../../../redux/formModesReducer'
 import CreateNoteReduxForm from './CreateNoteForm/CreateNoteForm'
 import {FC} from 'react'
-import {noteCategories} from '../../../enums/noteCategories'
-import {getDatesFromContent} from '../../../utils/getDatesFromContent'
-import {createTodayDate} from '../../../utils/createTodayDate'
+import {ThunkDispatch} from 'redux-thunk'
+import {AppStateType} from '../../../redux/store'
+import {NoteTypeForCreateNote} from '../../../api/notesAPI'
 
 type CreateNoteBlockProps = {
     onCloseForm: () => void
@@ -14,15 +14,11 @@ type CreateNoteBlockProps = {
 
 const CreateNoteBlock: FC<CreateNoteBlockProps> = ({onCloseForm}) => {
     const dispatch: Dispatch = useDispatch()
+    const thunkDispatch: ThunkDispatch<AppStateType, any, any> = useDispatch()
 
-    const onCreateNote = (formData: CreateFormDataType) => {
-        const note = {
-            ...formData,
-            content: formData.content ? formData.content : '',
-            dates: formData.content ? getDatesFromContent(formData.content) : '',
-            created: createTodayDate()
-        }
-        dispatch(noteActions.createNote(note))
+    const onCreateNote = (formData: NoteTypeForCreateNote) => {
+        const note = {...formData}
+        thunkDispatch(createNote({...formData}))
         dispatch(formModesActions.toggleCreateMode())
     }
 
@@ -32,12 +28,6 @@ const CreateNoteBlock: FC<CreateNoteBlockProps> = ({onCloseForm}) => {
             <CreateNoteReduxForm onCloseForm={onCloseForm} onSubmit={onCreateNote}/>
         </>
     )
-}
-
-export type CreateFormDataType = {
-    name: string,
-    category: noteCategories,
-    content?: string
 }
 
 export default CreateNoteBlock
