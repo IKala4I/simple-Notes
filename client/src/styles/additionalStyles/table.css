@@ -6,7 +6,7 @@
     }
 
     .tableHeader {
-        @apply bg-gray-700 rounded-md text-white grid items-center p-4 text-2xl
+        @apply bg-gray-700 rounded-md text-white grid items-center p-4 text-xl
     }
 
     .toolImg {
