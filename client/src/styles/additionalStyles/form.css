@@ -1,0 +1,15 @@
+@tailwind components;
+
+@layer components {
+    .form {
+        @apply mt-1 flex flex-col w-min text-xl
+    }
+
+    .fieldBlock {
+        @apply mb-3
+    }
+
+    .buttons {
+        @apply flex justify-evenly
+    }
+}

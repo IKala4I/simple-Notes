@@ -31,7 +31,7 @@ const EditNoteBlock: FC<EditNoteBlockProps> = ({noteIdForUpdate}) => {
 
     return (
         <>
-            <h3>Do you wanna change your note {noteName} ?</h3>
+            <h3 className="text-2xl font-medium my-3">Do you wanna change your note {noteName} ?</h3>
             <EditNoteReduxForm onCloseForm={disableEditMode} onSubmit={onUpdateNote}
                                noteData={{noteName, noteContent}}/>
         </>

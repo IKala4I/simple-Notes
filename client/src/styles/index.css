@@ -1,5 +1,7 @@
 @import './helpStyles/normilize.css';
 @import './helpStyles/reset.css';
+@import './additionalStyles/table.css';
+@import './additionalStyles/form.css';
 
 @tailwind base;
 @tailwind components;
@@ -25,20 +27,8 @@ code {
         @apply max-w-screen-xl mx-auto px-4;
     }
 
-    .table {
-        @apply grid gap-y-3 font-sans
-    }
-
-    .tableHeader {
-        @apply bg-gray-500 rounded-md text-white
-    }
-
-    .tableRow {
-        @apply bg-cyan-200
-    }
-
-    .tableRowSpan:not(:nth-of-type(1)) {
-        @apply text-gray-500
+    .actionButton {
+        @apply rounded-2xl border border-black border-solid p-2 cursor-pointer bg-blue-50
     }
 
     .formField {

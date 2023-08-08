@@ -1,6 +1,5 @@
 import {InjectedFormProps, reduxForm} from 'redux-form'
 import {FC} from 'react'
-import styles from '../../Forms.module.css'
 import {categoryOptions, createField, GetStringKeys, Input, Select, Textarea} from '../../../FormControls/FormControls'
 import {maxLengthCreator} from '../../../../utils/validators'
 import {NoteTypeForUpdateNote} from '../../../../api/notesAPI'
@@ -15,20 +14,20 @@ type EditNoteFormOwnProps = {
 const EditNoteForm: FC<InjectedFormProps<NoteTypeForUpdateNote, EditNoteFormOwnProps>
     & EditNoteFormOwnProps> = ({onCloseForm, handleSubmit, noteData}) => {
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.fieldBlock}>
+        <form className="form" onSubmit={handleSubmit}>
+            <div className="fieldBlock">
                 {createField<EditNoteFormTypeKeys>(`${noteData.noteName}`, 'name', [maxLength20], Input)}
             </div>
-            <div className={styles.fieldBlock}>
+            <div className="fieldBlock">
                 {createField<EditNoteFormTypeKeys>('', 'category', [], Select,
                     {options: categoryOptions})}
             </div>
-            <div className={styles.fieldBlock}>
+            <div className="fieldBlock">
                 {createField<EditNoteFormTypeKeys>(`${noteData.noteContent}`, 'content', [maxLength100], Textarea)}
             </div>
-            <div className={styles.buttons}>
-                <button className={styles.actionButton} type="submit">Save</button>
-                <button className={styles.actionButton} onClick={onCloseForm}>Close</button>
+            <div className="buttons">
+                <button className="actionButton w-1/3 text-2xl" type="submit">Save</button>
+                <button className="actionButton w-1/3 text-2xl" onClick={onCloseForm}>Close</button>
             </div>
         </form>
     )

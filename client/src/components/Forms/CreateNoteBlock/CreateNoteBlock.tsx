@@ -24,7 +24,7 @@ const CreateNoteBlock: FC<CreateNoteBlockProps> = ({onCloseForm}) => {
 
     return (
         <>
-            <h3>Hello, wanna create a new note?)</h3>
+            <h3 className="text-2xl font-medium my-3">Hello, wanna create a new note?)</h3>
             <CreateNoteReduxForm onCloseForm={onCloseForm} onSubmit={onCreateNote}/>
         </>
     )

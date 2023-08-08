@@ -12,7 +12,7 @@ const ActionButton: FC<ActionButtonProps> = ({imgSrc, buttonText, onClickCB}) =>
             <span>
                 <img className="w-7 mr-2" src={imgSrc} alt='logo'/>
             </span>
-            <button className="rounded-2xl border border-black border-solid p-2 cursor-pointer bg-blue-50" onClick={onClickCB}>{buttonText}</button>
+            <button className="actionButton" onClick={onClickCB}>{buttonText}</button>
         </div>
     )
 }
