@@ -3,7 +3,7 @@ import {FC} from 'react'
 
 const TableNoteHeader: FC = () => {
     return (
-        <div className={`tableHeader grid-cols-7Col`}>
+        <div className="tableHeader grid-cols-7Col">
             <div></div>
             <h4>Name</h4>
             <h4>Created</h4>

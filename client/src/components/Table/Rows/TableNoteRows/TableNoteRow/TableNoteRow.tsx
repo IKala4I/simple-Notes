@@ -15,7 +15,7 @@ const TableNoteRow: FC<TableNoteRowProps> = ({note, created, archiveUnarchiveCB,
             <div className="flex">
                 <img className="w-10" src={icons[note.category]} alt="cart"/>
             </div>
-            <span className="text-black">{note.name}</span>
+            <span className="text-black ">{note.name}</span>
             <span>{created}</span>
             <span>{note.category}</span>
             <span className="px-1">{note.content}</span>
