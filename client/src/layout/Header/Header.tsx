@@ -1,11 +1,10 @@
 import {FC} from 'react';
-import '../commonStyles.css';
 import {logos} from '../../imageHelpers';
 
 const Header: FC = () => {
     return (
         <header>
-            <div className="max-w-screen-xl bg-blue-100 mx-auto px-4">
+            <div className="container bg-blue-100">
                 <div className="p-4 grid grid-cols-3 text-2xl items-center">
                     <div className="flex items-center text-xl">
                         <svg className="pr-0.5" xmlns="http://www.w3.org/2000/svg" height="1em"

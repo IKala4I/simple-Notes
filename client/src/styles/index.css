@@ -19,3 +19,21 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer components {
+    .container {
+        @apply max-w-screen-xl mx-auto px-4;
+    }
+    .table{
+        @apply grid gap-y-3 font-sans
+    }
+    .tableHeader{
+        @apply bg-gray-500 rounded-md text-white
+    }
+    .tableRow{
+        @apply bg-cyan-200
+    }
+    .tableRowSpan:not(:nth-of-type(1)){
+        @apply text-gray-500
+    }
+}

@@ -1,4 +1,3 @@
-import '../commonStyles.css'
 import ActionButton from '../../components/ActionButton/ActionButton'
 import Table from '../../components/Table/Table'
 import {getIsCreateMode, getIsEditMode, getNoteIdForUpdate} from '../../redux/selectors'

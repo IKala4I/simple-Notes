@@ -1,4 +1,3 @@
-import styles from './ActionButton.module.css'
 import {FC} from 'react'
 
 type ActionButtonProps = {
@@ -9,11 +8,11 @@ type ActionButtonProps = {
 
 const ActionButton: FC<ActionButtonProps> = ({imgSrc, buttonText, onClickCB}) => {
     return (
-        <div className={styles.action}>
+        <div className="flex py-3 px-2 justify-end items-center text-lg ">
             <span>
-                <img className={styles.actionImg} src={imgSrc} alt='logo'/>
+                <img className="w-7 mr-2" src={imgSrc} alt='logo'/>
             </span>
-            <button className={styles.actionButton} onClick={onClickCB}>{buttonText}</button>
+            <button className="rounded-2xl border border-black border-solid p-2 cursor-pointer" onClick={onClickCB}>{buttonText}</button>
         </div>
     )
 }
