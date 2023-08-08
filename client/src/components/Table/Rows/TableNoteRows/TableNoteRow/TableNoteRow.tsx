@@ -1,4 +1,3 @@
-import styles from '../../Rows.module.css'
 import {icons, tools} from '../../../../../imageHelpers'
 import {FC} from 'react'
 import {NoteType} from '../../../../../Types/types'
@@ -12,36 +11,36 @@ type TableNoteRowProps = {
 }
 const TableNoteRow: FC<TableNoteRowProps> = ({note, created, archiveUnarchiveCB, removeNoteCB, showEditFormCB}) => {
     return (
-        <div className={`${styles.tableRow} ${styles.tableNoteRow}`}>
-            <div className={styles.iconBlock}>
-                <img className={styles.iconImg} src={icons[note.category]} alt="cart"/>
+        <div className="tableRow grid-cols-7Col text-gray-500">
+            <div className="flex">
+                <img className="w-10" src={icons[note.category]} alt="cart"/>
             </div>
-            <span className={styles.info}>{note.name}</span>
-            <span className={styles.info}>{created}</span>
-            <span className={styles.info}>{note.category}</span>
-            <span className={`${styles.noteContent} ${styles.info}`}>{note.content}</span>
-            <span className={styles.info}>{note.dates}</span>
-            <div className={styles.tools}>
+            <span className="text-black">{note.name}</span>
+            <span>{created}</span>
+            <span>{note.category}</span>
+            <span className="px-1">{note.content}</span>
+            <span>{note.dates}</span>
+            <div className="tools">
                 {!note.archived ?
                     <span>
-            <button className={styles.toolButton} onClick={() => showEditFormCB(note._id)}>
-    <img className={styles.toolImg} src={tools.pencilTool} alt="edit"/>
+            <button className="toolButton" onClick={() => showEditFormCB(note._id)}>
+    <img className="toolImg cursor-pointer" src={tools.pencilTool} alt="edit"/>
         </button>
         </span>
                     :
-                    <div className={styles.toolButton}>
+                    <div className="toolButton">
                     </div>
                 }
                 <span>
-        <button className={styles.toolButton} onClick={() => archiveUnarchiveCB(note._id)}>
-    <img className={styles.toolImg}
+        <button className="toolButton" onClick={() => archiveUnarchiveCB(note._id)}>
+    <img className="toolImg cursor-pointer"
          src={note.archived ? tools.unarchiveToolGrey : tools.archiveToolGrey}
          alt={note.archived ? 'unarchive' : 'archive'}/>
     </button>
     </span>
                 <span>
-    <button className={styles.toolButton} onClick={() => removeNoteCB(note._id)}>
-    <img className={styles.toolImg} src={tools.trashToolGrey} alt="trash"/>
+    <button className="toolButton" onClick={() => removeNoteCB(note._id)}>
+    <img className="toolImg cursor-pointer" src={tools.trashToolGrey} alt="trash"/>
         </button>
         </span>
             </div>

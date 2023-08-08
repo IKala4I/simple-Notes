@@ -40,7 +40,7 @@ const Table: FC<TableProps> = ({tableType, ...restProps}) => {
             )
         case tableTypes.Summary:
             return (
-                <div className="customTable">
+                <div className="customTable mb-10">
                     <SummaryTableHeader/>
                     <SummaryTableRows stats={stats} notes={notes}/>
                 </div>

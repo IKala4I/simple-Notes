@@ -6,19 +6,23 @@
     }
 
     .tableHeader {
-        @apply bg-gray-700 rounded-md text-white grid items-center p-4 text-xl
+        @apply bg-gray-700 rounded-md text-white grid items-center p-2.5 text-xl
     }
 
     .toolImg {
-        @apply w-8
+        @apply w-7
     }
 
     .tools {
         @apply flex justify-between
     }
 
+    .toolButton {
+        @apply bg-transparent w-7
+    }
+
     .tableRow {
-        @apply bg-cyan-200
+        @apply bg-cyan-100 grid items-center p-2.5 text-xl
     }
 
     .tableRowSpan:not(:nth-of-type(1)) {
