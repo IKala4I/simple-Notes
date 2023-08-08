@@ -1,7 +1,6 @@
 import {Field, WrappedFieldProps} from "redux-form"
 import {WrappedFieldMetaProps} from 'redux-form/lib/Field'
 import {FC, ReactNode} from 'react'
-import styles from './FormControls.module.css'
 import {FieldValidatorType} from '../../utils/validators'
 
 type FormControlPropsType = {
@@ -12,11 +11,11 @@ type FormControlPropsType = {
 const FormControl: FC<FormControlPropsType> = ({meta: {touched, error}, children}) => {
     const hasError = touched && error
     return (
-        <div className={(hasError ? styles.error : "")}>
+        <div className={(hasError ? "flex flex-col gap-y-1" : "")}>
             <div>
                 {children}
             </div>
-            {hasError && <span className={styles.errorSpan}>{error}</span>}
+            {hasError && <span className='text-red-600'>{error}</span>}
         </div>
     )
 }
@@ -26,7 +25,7 @@ export const Textarea: FC<WrappedFieldProps> = (props) => {
 
     return (
         <FormControl {...props}>
-            <textarea className={`${styles.field} ${styles.textarea}`} {...input} {...restProps} />
+            <textarea className="formField h-24" {...input} {...restProps} />
         </FormControl>
     )
 }
@@ -39,7 +38,7 @@ export const Select: FC<SelectProps> = (props) => {
 
     return (
         <FormControl {...props}>
-            <select className={styles.field} {...input} {...restProps}>
+            <select className="formField" {...input} {...restProps}>
                 <option value="" disabled selected>Select your option</option>
                 {options?.map((option) => (
                     <option value={option.value}>
@@ -56,7 +55,7 @@ export const Input: FC<WrappedFieldProps> = (props) => {
 
     return (
         <FormControl {...props}>
-            <input className={styles.field} {...input} {...restProps} />
+            <input className="formField" {...input} {...restProps} />
         </FormControl>
     )
 }

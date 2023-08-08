@@ -24,16 +24,24 @@ code {
     .container {
         @apply max-w-screen-xl mx-auto px-4;
     }
-    .table{
+
+    .table {
         @apply grid gap-y-3 font-sans
     }
-    .tableHeader{
+
+    .tableHeader {
         @apply bg-gray-500 rounded-md text-white
     }
-    .tableRow{
+
+    .tableRow {
         @apply bg-cyan-200
     }
-    .tableRowSpan:not(:nth-of-type(1)){
+
+    .tableRowSpan:not(:nth-of-type(1)) {
         @apply text-gray-500
+    }
+
+    .formField {
+        @apply w-64 border border-black border-solid
     }
 }
