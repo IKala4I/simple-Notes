@@ -1,6 +1,5 @@
 import TableNoteHeader from './Headers/TableNoteHeader/TableNoteHeader'
 import TableNoteRows from './Rows/TableNoteRows/TableNoteRows'
-import styles from './Table.module.css'
 import {tableTypes} from '../../enums/tableTypes'
 import SummaryTableHeader from './Headers/SummaryTableHeader/SummaryTableHeader'
 import SummaryTableRows from './Rows/SummaryTableRows/SummaryTableRows'
@@ -27,21 +26,21 @@ const Table: FC<TableProps> = ({tableType, ...restProps}) => {
     switch (tableType) {
         case tableTypes.ActiveNotes:
             return (
-                <div className={styles.table}>
+                <div className="customTable">
                     <TableNoteHeader/>
                     <TableNoteRows notes={activeNotes} {...restProps}/>
                 </div>
             )
         case tableTypes.ArchivedNotes:
             return (
-                <div className={styles.table}>
+                <div className="customTable">
                     <TableNoteHeader/>
                     <TableNoteRows notes={archivedNotes} {...restProps}/>
                 </div>
             )
         case tableTypes.Summary:
             return (
-                <div className={styles.table}>
+                <div className="customTable">
                     <SummaryTableHeader/>
                     <SummaryTableRows stats={stats} notes={notes}/>
                 </div>

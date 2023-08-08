@@ -1,12 +1,20 @@
 @tailwind components;
 
 @layer components {
-    .table {
-        @apply grid gap-y-3 font-sans
+    .customTable {
+        @apply grid gap-y-3 font-sans my-1
     }
 
     .tableHeader {
-        @apply bg-gray-500 rounded-md text-white
+        @apply bg-gray-700 rounded-md text-white grid items-center p-4 text-2xl
+    }
+
+    .toolImg {
+        @apply w-8
+    }
+
+    .tools {
+        @apply flex justify-between
     }
 
     .tableRow {
