@@ -1,0 +1,40 @@
+version: '3.8'
+
+volumes:
+  postgres_volume:
+
+services:
+  postgres-db:
+    container_name: my-postgres-db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=notes
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+
+  nodejs-server:
+    container_name: my-nodejs-server
+    build: .
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres-db
+    volumes:
+      - ./:/usr/app/
+      - /usr/app/node-modules
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "placeholder@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-db

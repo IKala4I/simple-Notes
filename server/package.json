@@ -4,8 +4,9 @@
   "description": "A NodeJS application with TypeScript that will have few REST endpoints.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",

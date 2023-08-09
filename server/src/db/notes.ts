@@ -2,11 +2,11 @@ import pgPromise from 'pg-promise'
 
 const pgp = pgPromise()
 const connectionConfig = {
-    host: 'host',
-    port: 1111,
-    database: 'db',
-    user: 'user',
-    password: 'pass',
+    host: 'postgres-db',
+    port: 5432,
+    database: 'notes',
+    user: 'postgres',
+    password: 'test',
 }
 const db = pgp(connectionConfig)
 
@@ -16,7 +16,7 @@ export const getNotes = async () => {
     try {
         return await db.any('SELECT * FROM notes')
     } catch (error) {
-        throw new Error('Error fetching notes')
+        throw new Error(`Error fetching notes`)
     }
 }
 
