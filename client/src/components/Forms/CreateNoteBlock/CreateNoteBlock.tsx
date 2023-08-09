@@ -17,7 +17,6 @@ const CreateNoteBlock: FC<CreateNoteBlockProps> = ({onCloseForm}) => {
     const thunkDispatch: ThunkDispatch<AppStateType, any, any> = useDispatch()
 
     const onCreateNote = (formData: NoteTypeForCreateNote) => {
-        const note = {...formData}
         thunkDispatch(createNote({...formData}))
         dispatch(formModesActions.toggleCreateMode())
     }
