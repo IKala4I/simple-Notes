@@ -33,23 +33,23 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
         case ARCHIVE_NOTE:
             return {
                 ...state,
-                notes: updateObjectInArray(state.notes, action.noteId, '_id', {archived: true})
+                notes: updateObjectInArray(state.notes, action.noteId, 'id', {archived: true})
             }
         case UNARCHIVE_NOTE:
             return {
                 ...state,
-                notes: updateObjectInArray(state.notes, action.noteId, '_id', {archived: false})
+                notes: updateObjectInArray(state.notes, action.noteId, 'id', {archived: false})
             }
         case REMOVE_NOTE:
             return {
                 ...state,
-                notes: state.notes.filter(note => note._id !== action.noteId)
+                notes: state.notes.filter(note => note.id !== action.noteId)
             }
         case UPDATE_NOTE:
             return {
                 ...state,
                 notes: state.notes.map(note => {
-                    if (note._id === action.payload.noteId)
+                    if (note.id === action.payload.noteId)
                         return {
                             ...action.payload.note
                         }
@@ -122,9 +122,7 @@ export const createNote = (noteData: NoteTypeForCreateNote) => async (dispatch: 
 export const updateNote = (noteId: string, noteData: NoteTypeForUpdateNote) => async (dispatch: any) => {
     const response = await notesAPI.updateNote(noteId, noteData)
     if (response.status === 200) {
-        const response = await notesAPI.getNoteById(noteId)
-        if (response.status === 200)
-            dispatch(noteActions.updateNoteSuccess(noteId, response.data))
+        dispatch(noteActions.updateNoteSuccess(noteId, response.data))
     }
 }
 const updateObjectInArray = (

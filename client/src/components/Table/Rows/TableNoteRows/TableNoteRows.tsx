@@ -51,7 +51,7 @@ const TableNoteRows: FC<TableNoteRowsProps> = ({notes, noteIdForUpdate, isEditMo
 
     const tableRows = notes.map((note: NoteType) =>
         <TableNoteRow
-            key={note._id}
+            key={note.id}
             note={note}
             created={format(new Date(note.created), 'yyyy-MM-dd')}
             archiveUnarchiveCB={note.archived ? unarchiveNote : archiveNote}

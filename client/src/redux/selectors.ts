@@ -15,11 +15,11 @@ export const getIsEditMode = (state: AppStateType): boolean => {
 }
 export const getNameNoteForUpdate = (noteId: string) => (state: AppStateType): string => {
     const notes = getNotes(state)
-    return notes.find(note => note._id === noteId)?.name || ''
+    return notes.find(note => note.id === noteId)?.name || ''
 }
 export const getContentNoteForUpdate = (noteId: string) => (state: AppStateType): string => {
     const notes = getNotes(state)
-    return notes.find(note => note._id === noteId)?.content || ''
+    return notes.find(note => note.id === noteId)?.content || ''
 }
 export const getStats = (state: AppStateType): Stats => {
     return state.notes.notesStats

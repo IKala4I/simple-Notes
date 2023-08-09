@@ -23,7 +23,7 @@ const TableNoteRow: FC<TableNoteRowProps> = ({note, created, archiveUnarchiveCB,
             <div className="tools">
                 {!note.archived ?
                     <span>
-            <button className="toolButton" onClick={() => showEditFormCB(note._id)}>
+            <button className="toolButton" onClick={() => showEditFormCB(note.id)}>
     <img className="toolImg cursor-pointer" src={tools.pencilTool} alt="edit"/>
         </button>
         </span>
@@ -32,14 +32,14 @@ const TableNoteRow: FC<TableNoteRowProps> = ({note, created, archiveUnarchiveCB,
                     </div>
                 }
                 <span>
-        <button className="toolButton" onClick={() => archiveUnarchiveCB(note._id)}>
+        <button className="toolButton" onClick={() => archiveUnarchiveCB(note.id)}>
     <img className="toolImg cursor-pointer"
          src={note.archived ? tools.unarchiveToolGrey : tools.archiveToolGrey}
          alt={note.archived ? 'unarchive' : 'archive'}/>
     </button>
     </span>
                 <span>
-    <button className="toolButton" onClick={() => removeNoteCB(note._id)}>
+    <button className="toolButton" onClick={() => removeNoteCB(note.id)}>
     <img className="toolImg cursor-pointer" src={tools.trashToolGrey} alt="trash"/>
         </button>
         </span>
