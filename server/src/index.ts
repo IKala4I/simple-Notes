@@ -6,7 +6,6 @@ import compression from 'compression'
 import cors from 'cors'
 
 import router from './router'
-import mongoose from 'mongoose'
 
 const app = express()
 app.use((req, res, next) => {
@@ -23,12 +22,7 @@ app.use(bodyParser.json())
 const server = http.createServer(app)
 
 server.listen(8080, () => {
+    console.log("Server running on port 8080")
 })
-
-// const MONGO_URL = 'mongodb+srv://<User>:<password>@cluster0.ytkbkgw.mongodb.net/?retryWrites=true&w=majority'
-
-mongoose.Promise = Promise
-mongoose.connect('MONGO_URL') //Provide const MONGO_URL
-mongoose.connection.on('error', (error: Error) => console.log(error))
 
 app.use('/', router())

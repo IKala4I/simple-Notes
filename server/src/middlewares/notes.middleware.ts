@@ -11,6 +11,9 @@ export const createNoteValid = (req: express.Request, res: CustomResponse, next:
         if (!isString(name) || !isString(category))
             throw new Error('Name and category must be string')
 
+        if(name.length > 20)
+            throw new Error('Length of name must be less than 20 symbols')
+
         if (!isCategoryType(category))
             throw new Error('The category should be: Task, Quote, Random Thought or Idea')
 
@@ -24,7 +27,6 @@ export const createNoteValid = (req: express.Request, res: CustomResponse, next:
 
 export const updateNoteValid = async (req: express.Request, res: CustomResponse, next: express.NextFunction) => {
     const {name, category, content, archived} = req.body
-    let dates = ''
     try {
         if (name || name === '')
             if (!isString(name) || name === '')
@@ -40,8 +42,6 @@ export const updateNoteValid = async (req: express.Request, res: CustomResponse,
         if (content) {
             if (!isString(content))
                 throw new Error('Content must be string')
-            const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/g;
-            dates = content.match(dateRegex)?.join(', ') || ''
         }
 
         if (archived)
@@ -49,8 +49,7 @@ export const updateNoteValid = async (req: express.Request, res: CustomResponse,
                 throw new Error('Archived must be true or false')
 
         res.data = {
-            ...req.body,
-            ...(typeof content === 'string' ? {dates} : {}),
+            ...req.body
         }
         next()
     } catch (error) {

@@ -1,26 +1,56 @@
-import mongoose from 'mongoose'
+import pgPromise from 'pg-promise'
 
-const NoteSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    created: {type: Date, default: Date.now},
-    category: {type: String, required: true},
-    content: {type: String, default: ""},
-    dates: {type: String, default: ""},
-    archived: {type: Boolean, default: false}
-})
-
-NoteSchema.pre('save', function (next) {
-    const content = this.get('content')
-    const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/g
-    const dates = content.match(dateRegex)?.join(', ') || ''
-    this.set('dates', dates)
-    next()
-})
-export const NoteModel = mongoose.model('Note', NoteSchema)
+const pgp = pgPromise()
+const connectionConfig = {
+    host: 'host',
+    port: 1111,
+    database: 'db',
+    user: 'user',
+    password: 'pass',
+}
+const db = pgp(connectionConfig)
 
 // Note Actions
-export const getNotes = () => NoteModel.find()
-export const getNoteById = (id: string) => NoteModel.findById(id)
-export const createNote = (values: Record<string, any>) => new NoteModel(values).save().then((note) => note.toObject())
-export const deleteNoteById = (id: string) => NoteModel.findOneAndDelete({_id: id})
-export const updateNoteById = (id: string, values: Record<string, any>) => NoteModel.findByIdAndUpdate(id, values)
+
+export const getNotes = async () => {
+    try {
+        return await db.any('SELECT * FROM notes')
+    } catch (error) {
+        throw new Error('Error fetching notes')
+    }
+}
+
+export const getNoteById = async (id: string) => {
+    try {
+        return await db.oneOrNone('SELECT * FROM notes WHERE id = $1', id)
+    } catch (error) {
+        throw new Error('Error fetching note by ID')
+    }
+}
+
+export const createNote = async (values: Record<string, any>) => {
+    try {
+        const query = pgp.helpers.insert(values, null, 'notes') + ' RETURNING *'
+        return await db.one(query)
+    } catch (error) {
+        throw new Error('Error creating note')
+    }
+}
+
+export const deleteNoteById = async (id: string) => {
+    try {
+        return await db.oneOrNone('DELETE FROM notes WHERE id = $1 RETURNING *', id)
+    } catch (error) {
+        throw new Error('Error deleting note by ID')
+    }
+}
+
+export const updateNoteById = async (id: string, values: Record<string, any>) => {
+    try {
+        const query = pgp.helpers.update(values, null, 'notes') + ' WHERE id = $1 RETURNING *'
+        return await db.one(query, id)
+    } catch (error) {
+        throw new Error('Error updating note by ID')
+    }
+}
+
